@@ -19,7 +19,7 @@ export function TransactionCard({data}: Props) {
       <Description>Empresa: {data.empresa}</Description>
       <Description>Funcionário: {data.nome}</Description>
       <Local>Função: {data.func}</Local>
-      <Amount>Salário: {data.salario}</Amount>
+      <Amount>Salário: R$ {data.salario}</Amount>
 
 
       <Footer>

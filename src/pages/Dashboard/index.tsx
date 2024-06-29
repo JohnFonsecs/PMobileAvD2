@@ -17,7 +17,7 @@ import { formatAmount } from '../../utils/formatAmount';
 const validationRules = {
   empresas: ['Microsoft', 'Google', 'Meta',],
   departs: ['RH', 'TI',],
-  funcs: ['Gerente', 'Coordernador']
+  funcs: ['Gerente', 'Coordenador']
 };
 
 export function Dashboard() {
@@ -35,26 +35,24 @@ export function Dashboard() {
     if (empresa.trim() === '' || matricula.trim() === ''
       || nome.trim() === '' || func.trim() === ''
       || depart.trim().toUpperCase() === '' || salario.trim() === '') {
-        return Alert.alert('Atencao', 'Todos os campos devem ser preenchidos')
-    }
+        return Alert.alert('Atenção', 'Todos os campos devem ser preenchidos')}
 
-    if (!validationRules.funcs.includes(func)) {
-      return Alert.alert('Função', 'Aceita somente as funções: Gerente e Coordernador	')}
-
-    if (!validationRules.departs.includes(depart.toUpperCase().trim())) {
-      return Alert.alert('Departamento', 'Aceita somente os departamentos: RH e TI')}
-      
     if (!validationRules.empresas.includes(empresa.trim())) {
       return Alert.alert('Empresa', 'Aceita somente as empresas: Microsoft, Google e Meta')}
 
+    if (!validationRules.funcs.includes(func.trim())) {
+      return Alert.alert('Função', 'Aceita somente as funções: Gerente e Coordenador')}
+
+    if (!validationRules.departs.includes(depart.toUpperCase().trim())) {
+      return Alert.alert('Departamento', 'Aceita somente os departamentos: RH e TI')}    
 
     const data = {
       id: String(new Date().getTime()),
-      empresa,
-      matricula,
-      nome,
-      func,
-      depart: depart.toUpperCase(),
+      empresa: empresa.trim(),
+      matricula: matricula.trim(),
+      nome: nome.trim(),
+      func: func.trim(),
+      depart: depart.toUpperCase().trim(),
       salario: formatAmount(salario)
     }
 
