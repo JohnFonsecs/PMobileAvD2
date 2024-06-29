@@ -17,12 +17,13 @@ type EmpresaData = {
 
 export function Resume() {
   const [totalByCompanys, SetTotalByCompanys] = useState<EmpresaData[]>([])
-
+  const [totalSalario, setTotalSalario] = useState(0);
   async function loadData() {
     const data = await companyGetAll()
     const empresas = ['Microsoft' , 'Google' , 'Meta']
 
     const TotalByCompany : EmpresaData[] = []
+    let totalSalarioGeral = 0; 
 
     empresas.forEach(empresa => {
       let totalSalario = 0
@@ -30,6 +31,7 @@ export function Resume() {
       data.forEach(dat => {
         if (dat.empresa === empresa) {
           totalSalario += dat.salario
+          totalSalarioGeral += dat.salario;
         }
       })
 
@@ -40,6 +42,7 @@ export function Resume() {
     })
 
     SetTotalByCompanys(TotalByCompany)
+    setTotalSalario(totalSalarioGeral); 
   }
   useFocusEffect(useCallback(() => {
       loadData()
@@ -57,11 +60,16 @@ export function Resume() {
               <HistoryCard
                 key={item.func}
                 func={item.func}
-                salario={`R$ ${item.salario}`}
+                salario={`R$ ${item.salario.toFixed(2)}`}
               />
             )
           })
         }
+        
+        <HistoryCard
+          func="Total Geral"
+          salario={`R$ ${totalSalario.toFixed(2)}`}
+        />
       </Content>
 
     </Container>
