@@ -41,6 +41,51 @@ export function Resume() {
       })
     })
 
+    let totalSalarioGoogleGerenteCoordenador = 0;
+    data.forEach(dat => {
+      if (dat.empresa === 'Google' && (dat.func === 'Gerente' || dat.func === 'Coordenador')) {
+        totalSalarioGoogleGerenteCoordenador += dat.salario;
+      }
+    });
+
+    TotalByCompany.push({
+      func: 'Google - Gerente e Coordenador',
+      salario: parseFloat(totalSalarioGoogleGerenteCoordenador.toFixed(2)),
+    });
+
+    let totalSalarioMicrosoftRH = 0;
+    let totalSalarioMicrosoftTI = 0;
+    data.forEach(dat => {
+      if (dat.empresa === 'Microsoft' && dat.depart === 'RH') {
+        totalSalarioMicrosoftRH += dat.salario;
+      }
+      if (dat.empresa === 'Microsoft' && dat.depart === 'TI') {
+        totalSalarioMicrosoftTI += dat.salario;
+      }
+    });
+
+    TotalByCompany.push({
+      func: 'Microsoft - RH',
+      salario: parseFloat(totalSalarioMicrosoftRH.toFixed(2)),
+    });
+
+    TotalByCompany.push({
+      func: 'Microsoft - TI',
+      salario: parseFloat(totalSalarioMicrosoftTI.toFixed(2)),
+    });
+
+    let totalSalarioMetaTI = 0;
+    data.forEach(dat => {
+      if (dat.empresa === 'Meta' && dat.depart === 'TI' && (dat.func === 'Gerente' || dat.func === 'Coordenador')) {
+        totalSalarioMetaTI += dat.salario;
+      }
+    });
+
+    TotalByCompany.push({
+      func: 'Meta - TI - Gerente e Coordenador',
+      salario: parseFloat(totalSalarioMetaTI.toFixed(2)),
+    });
+
     SetTotalByCompanys(TotalByCompany)
     setTotalSalario(totalSalarioGeral); 
   }
